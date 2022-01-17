@@ -4,7 +4,7 @@ import boto3
 import backend.piechart as piechart
 import os
 
-app = Flask(__name__ , static_folder='/frontend/build', static_url_path='') 
+app = Flask(__name__ , static_folder='frontend/build', static_url_path='') 
 cors = CORS(app)
 
 @app.route('/board')
