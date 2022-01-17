@@ -1,7 +1,7 @@
 from flask import Flask, render_template, send_from_directory, request, jsonify,make_response
 from flask_cors import CORS, cross_origin
 import boto3
-import back-end
+import backend.piechart as piechart
 import os
 
 app = Flask(__name__ , static_folder='../front-end/build', static_url_path='') 
