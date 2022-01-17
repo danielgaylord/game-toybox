@@ -1,7 +1,7 @@
 from flask import Flask, render_template, send_from_directory, request, jsonify,make_response
 from flask_cors import CORS, cross_origin
 import boto3
-import piechart
+import back-end
 import os
 
 app = Flask(__name__ , static_folder='../front-end/build', static_url_path='') 
@@ -19,7 +19,6 @@ def GeneratePie():
     colors = request.args.get('colors')
     wedge = request.args.get('wedge')
     piechart.GeneratePie(data, colors, wedge)
-    return 
 
 @app.route('/')
 def serve():
