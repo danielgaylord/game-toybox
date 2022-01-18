@@ -76,9 +76,9 @@ const PieChart = () => {
 return (
     <div>
         <Draggable onDrag={onDrag} onStop={onStop}>
-        <CustomIconButton color="primary" variant="outlined" aria-label="pie chart app" component="span" size="large" onClick={handleOpen}>
-            <PieChartIcon sx={IconStyle}/>
-        </CustomIconButton>
+            <CustomIconButton color="primary" variant="outlined" aria-label="pie chart app" component="span" size="large" onClick={handleOpen}>
+                <PieChartIcon sx={IconStyle}/>
+            </CustomIconButton>
         </Draggable>
         <Modal open={open} onClose={handleClose}>
             <Box sx={BoxStyle}>

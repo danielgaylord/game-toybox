@@ -1,4 +1,3 @@
-import logo from './assets/logo.svg';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import PieChart from './components/PieChart'
