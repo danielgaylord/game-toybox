@@ -2,6 +2,7 @@ import logo from './assets/logo.svg';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import PieChart from './components/PieChart'
+import GadotTutorial from './components/GodotTutorial'
 
 const GlobalStyles = css`
     body {
@@ -68,6 +69,7 @@ function App() {
       <AppStyles className="App">
         <header className="App-header">
           <PieChart />
+          <GadotTutorial />
         </header>
       </AppStyles>
     </>
