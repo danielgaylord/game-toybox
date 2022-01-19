@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import { styled } from '@mui/material/styles';
-import GadotEngine from '../assets/godot-tutorial/FirstGadotGame'
+import estyled from '@emotion/styled';
 
 const BoxStyle = {
     position: 'absolute',
@@ -26,13 +26,15 @@ const IconStyle = {
 const CustomIconButton = styled(IconButton)`
     color: #20b2aa;
     background-color: black;
+    top: ${Math.floor((Math.random() * 0.8 - 0.4) * window.innerHeight)}px;
+    left: ${Math.floor((Math.random() * 0.8 - 0.4) * window.innerWidth)}px;
 
     :hover {
         color: #2e8b57;
     }
 `;
 
-const GadotCanvas = styled.div`
+const GadotCanvas = estyled.div`
     touch-action: none;
     margin: 0;
     border: 0 none;

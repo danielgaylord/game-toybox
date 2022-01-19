@@ -1,7 +1,8 @@
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
-import PieChart from './components/PieChart'
-import GadotTutorial from './components/GodotTutorial'
+import MatterTest from './components/MatterTest';
+import PieChart from './components/PieChart';
+import GodotTutorial from './components/GodotTutorial';
 
 const GlobalStyles = css`
     body {
@@ -67,8 +68,9 @@ function App() {
       <Global styles={GlobalStyles} />
       <AppStyles className="App">
         <header className="App-header">
+          <MatterTest />
           <PieChart />
-          <GadotTutorial />
+          <GodotTutorial />
         </header>
       </AppStyles>
     </>

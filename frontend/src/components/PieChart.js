@@ -25,6 +25,8 @@ const BoxStyle = {
   const CustomIconButton = styled(IconButton)`
     color: #20b2aa;
     background-color: black;
+    top: ${Math.floor((Math.random() * 0.8 - 0.4) * window.innerHeight)}px;
+    left: ${Math.floor((Math.random() * 0.8 - 0.4) * window.innerWidth)}px;
 
     :hover {
         color: #2e8b57;
