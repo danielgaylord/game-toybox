@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Engine, Render, Bodies, Body, World, Runner, Composite, Mouse, MouseConstraint } from 'matter-js';
+import pie_sprite from '../assets/images/pie-chart.png';
 
 const ToyBox = () => {
     // References to interact with scene and engine outside of Matter
@@ -34,7 +35,15 @@ const ToyBox = () => {
 
         // Create an array of bodies and add app bodies
         var bodies = []
-        const ball1 = Bodies.circle(Math.random() * screenW, Math.random() * screenH, 100);
+        const ball1 = Bodies.circle(Math.random() * screenW, Math.random() * screenH, 100, {
+            render: {
+                sprite: {
+                    texture: pie_sprite,
+                    xScale: .5,
+                    yScale: .5,
+                }
+            }
+        });
         const ball2 = Bodies.circle(Math.random() * screenW, Math.random() * screenH, 100);
         const ball3 = Bodies.circle(Math.random() * screenW, Math.random() * screenH, 100);
         const ball4 = Bodies.circle(Math.random() * screenW, Math.random() * screenH, 100);
