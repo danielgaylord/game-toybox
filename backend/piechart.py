@@ -16,3 +16,6 @@ def GeneratePie(data, colors, wedge):
     plt.tight_layout()
 
     return mpld3.fig_to_html(fig1)
+
+if __name__ == '__main__':
+    print(GeneratePie("40,60", "003049,ffcdb2", ".05"))

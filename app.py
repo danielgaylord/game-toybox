@@ -13,11 +13,12 @@ def Welcome():
 
 @app.route('/board/piechart/')
 @cross_origin()
-def GeneratePie():
+def get_pie_chart():
     data = request.args.get('data')
     colors = request.args.get('colors')
     wedge = request.args.get('wedge')
-    piechart.GeneratePie(data, colors, wedge)
+    print("check")
+    return {'html': piechart.GeneratePie(data, colors, wedge)}
 
 @app.route('/')
 def serve():
