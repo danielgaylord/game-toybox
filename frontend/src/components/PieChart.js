@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import IconButton from '@mui/material/IconButton';
+import { TextField, Button, IconButton, Modal, Box } from '@mui/material';
 import PieChartIcon from '@mui/icons-material/PieChart';
 import { styled } from '@mui/material/styles';
 
@@ -10,7 +8,8 @@ const BoxStyle = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 600,
+    height: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -74,10 +73,10 @@ return (
         <Modal open={open} onClose={handleClose}>
             <Box sx={BoxStyle}>
                 <div dangerouslySetInnerHTML={{__html: html}} />
-                <input type="text" id="hf-text" name="hf-text" placeholder="40,60" autoComplete="" value={data} onChange={(event)=> setData(event.target.value)}/>
-                <input type="text" id="hf-text" name="hf-text" placeholder="003049,ffcdb2" autoComplete="" value={colors} onChange={(event)=> setColors(event.target.value)}/>
-                <input type="text" id="hf-text" name="hf-text" placeholder="0.05" autoComplete="" value={wedge} onChange={(event)=> setWedge(event.target.value)}/>
-                <button type="submit" size="sm" color="primary" onClick={() => fetchData()}>Submit</button>
+                <TextField id="pie-data" variant="outlined" label="Data Slices" size="small" defaultValue="40,60" helperText="Values seperated by commas totaling 100" value={data} onChange={(event)=> setData(event.target.value)}/>
+                <TextField id="pie-colors" variant="outlined" label="Slice Colors" size="small" defaultValue="003049,ffcdb2" helperText="6-digit hexadecimal values seperated by commas" value={colors} onChange={(event)=> setColors(event.target.value)}/>
+                <TextField id="pie-wedge" variant="outlined" label="Wedge Size" size="small" defaultValue="0.05" value={wedge} onChange={(event)=> setWedge(event.target.value)}/>
+                <Button size="medium" variant="contained" onClick={() => fetchData()}>Submit</Button>
             </Box>
         </Modal>
     </div>
