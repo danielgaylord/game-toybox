@@ -72,7 +72,7 @@ return (
         </CustomIconButton>
         <Modal open={open} onClose={handleClose}>
             <Box sx={BoxStyle}>
-                <div dangerouslySetInnerHTML={{__html: html}} />
+                <div style={{width: '500px', height: '400px'}} dangerouslySetInnerHTML={{__html: html}} />
                 <TextField id="pie-data" variant="outlined" label="Data Slices" size="small" defaultValue="40,60" helperText="Values seperated by commas totaling 100" value={data} onChange={(event)=> setData(event.target.value)}/>
                 <TextField id="pie-colors" variant="outlined" label="Slice Colors" size="small" defaultValue="003049,ffcdb2" helperText="6-digit hexadecimal values seperated by commas" value={colors} onChange={(event)=> setColors(event.target.value)}/>
                 <TextField id="pie-wedge" variant="outlined" label="Wedge Size" size="small" defaultValue="0.05" value={wedge} onChange={(event)=> setWedge(event.target.value)}/>
