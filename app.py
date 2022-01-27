@@ -30,3 +30,8 @@ def not_found(e):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))
+
+    # To run a development server with hot reloading (in a virtual environment):
+    # - set FLASK_APP=app.py
+    # - set FLASK_ENV=development
+    # - flask run
