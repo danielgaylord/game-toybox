@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Matter from 'matter-js';
 import PieChart from './PieChart';
+import TimeClock from './TimeClock';
 
 const ToyBox = () => {
     // References to interact with scene and engine outside of Matter
@@ -136,6 +137,7 @@ const ToyBox = () => {
         <>
             <div ref={scene} style={{ width: '100%', height: '100%', overflow: 'hidden'}}>
                 <PieChart />
+                <TimeClock />
             </div>
         </>
     )
