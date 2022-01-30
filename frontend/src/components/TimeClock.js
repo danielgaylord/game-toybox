@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, IconButton, Modal, Box } from '@mui/material';
+import { Button, IconButton, Modal, Box, Stack, Typography, Switch } from '@mui/material';
+import DateTimePicker from '@mui/lab/DateTimePicker';
 import TimeClockIcon from '../assets/images/clock-icon.png';
 import { styled } from '@mui/material/styles';
 
@@ -14,15 +15,12 @@ const BoxStyle = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-  };
+};
 
-  const CustomIconButton = styled(IconButton)`
-    color: #20b2aa;
-    background-color: black;
-
+const CustomIconButton = styled(IconButton)`
     :hover {
-        color: #2e8b57;
-  }
+        transform: 'scale(2)',
+    }
 `;
 
 const TimeClock = () => {
@@ -36,6 +34,9 @@ const TimeClock = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    
+    const [func, setFunc] = useState(true);
+    const functionSwitch = () => setFunc(!func);
    
     function fetchData(){
         setTime('');
@@ -52,13 +53,28 @@ const TimeClock = () => {
 
 return (
     <div className="toy round" style={{position: 'absolute'}}>
-        <CustomIconButton color="primary" variant="outlined" aria-label="pie chart app" component="span" size="large" onClick={handleOpen}>
+        <CustomIconButton aria-label="time clock app" onClick={handleOpen}>
             <img src={TimeClockIcon} alt="clock icon" />
         </CustomIconButton>
         <Modal open={open} onClose={handleClose}>
             <Box sx={BoxStyle}>
-                <p>It is now {time}.</p>
-                <Button size="medium" variant="contained" onClick={() => fetchData()}>Get Current Time!</Button>
+                <Stack direction="row" spacing={2} alignItems="center" onChange={functionSwitch}>
+                    <Typography>Now</Typography>
+                    <Switch />
+                    <Typography>Difference</Typography>
+                </Stack>
+                {func ? 
+                    <Stack direction="column" alignItems="center">
+                        <Button size="medium" variant="contained" onClick={() => fetchData()}>Get Current Time!</Button>
+                        <Typography>It is now {time}</Typography>
+                    </Stack>
+                : null}
+                {func ? 
+                    null : 
+                    <Stack direction="column" alignItems="center">
+                        <DateTimePicker />
+                    </Stack>
+                }
             </Box>
         </Modal>
     </div>
