@@ -10,8 +10,8 @@ const BoxStyle = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 600,
-    height: 400,
+    width: 500,
+    height: 250,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -71,14 +71,15 @@ return (
                         <Typography>Difference</Typography>
                     </Stack>
                     {func ? 
-                        <Stack direction="column" alignItems="center" spacing={3}>
+                        <Stack direction="column" alignItems="center" spacing={6}>
                             <Button size="medium" variant="contained" onClick={() => fetchData("timeclock/")}>Get Current Time!</Button>
-                            <Typography>It is now {time}</Typography>
+                            <Typography>It is now:</Typography>
+                            <Typography>{time}</Typography>
                         </Stack>
                     : null}
                     {func ? 
                         null :
-                        <Stack direction="column" alignItems="center" spacing={3}>
+                        <Stack direction="column" alignItems="center" spacing={4}>
                             <Button size="medium" variant="contained" onClick={() => fetchData("timeclockdiff/")}>Get Time Difference!</Button> 
                             <Stack direction="row" alignItems="center" spacing={2}>
                                 <LocalizationProvider dateAdapter={DateAdapter}>
@@ -86,7 +87,7 @@ return (
                                     <DateTimePicker label="End Time" value={end} onChange={handleEnd} renderInput={(params) => <TextField {...params} />}/>
                                 </LocalizationProvider>
                             </Stack>
-                            <Typography>The dates are {time[0]} days, {time[1]} hours, {time[2]} minutes, and {time[3]} seconds apart</Typography>
+                            <Typography>The dates are {time[0]} days, {time[1]} hours, and {time[2]} minutes apart</Typography>
                         </Stack>
                     }
                 </Stack>
