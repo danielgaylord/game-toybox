@@ -25,7 +25,7 @@ def get_pie_chart():
 def get_time_clock_diff():
     start_time = request.args.get('start')
     end_time = request.args.get('end')
-    return {'diff': timeclock.time_between(start_time, end_time)}
+    return {'time': timeclock.time_between(start_time, end_time)}
 
 @app.route('/board/timeclock/')
 @cross_origin()

@@ -32,19 +32,22 @@ const TimeClock = () => {
     const handleStart = (newStart) => setStart(newStart);
     const handleEnd = (newEnd) => setEnd(newEnd);
 
-    const api_base_url = window.location.href + "board/timeclock/"
+    const api_base_url = window.location.href + "board/"
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     
     const [func, setFunc] = useState(true);
-    const functionSwitch = () => setFunc(!func);
+    const functionSwitch = () => {
+        setTime("");
+        setFunc(!func);
+    }
    
-    function fetchData(){
+    function fetchData(page){
         setTime('');
         
-        var url_req_string = api_base_url + "?start=" + start + "&end=" + end;  
+        var url_req_string = api_base_url + page + "?start=" + start.toUTCString() + "&end=" + end.toUTCString();  
         fetch(url_req_string)
             .then(res => res.json())
             .then((result) => {
@@ -61,30 +64,32 @@ return (
         </CustomIconButton>
         <Modal open={open} onClose={handleClose}>
             <Box sx={BoxStyle}>
-                <Stack direction="column" alignItems="center" spacing={2} onChange={functionSwitch}>
-                    <Typography>Now</Typography>
-                    <Switch />
-                    <Typography>Difference</Typography>
-                </Stack>
-                {func ? 
-                    <Stack direction="column" alignItems="center" spacing={3}>
-                        <Button size="medium" variant="contained" onClick={() => fetchData()}>Get Current Time!</Button>
-                        <Typography>It is now {time}</Typography>
+                <Stack direction="column" alignItems="center" spacing={3}>
+                    <Stack direction="row" alignItems="center" spacing={0} onChange={functionSwitch}>
+                        <Typography>Now</Typography>
+                        <Switch />
+                        <Typography>Difference</Typography>
                     </Stack>
-                : null}
-                {func ? 
-                    null :
-                    <Stack direction="column" alignItems="center" spacing={3}>
-                        <Button size="medium" variant="contained" onClick={() => fetchData()}>Get Time Difference!</Button> 
-                        <Stack direction="row" alignItems="center" spacing={2}>
-                            <LocalizationProvider dateAdapter={DateAdapter}>
-                                <DateTimePicker label="Start Time" value={start} onChange={handleStart} renderInput={(params) => <TextField {...params} />}/>
-                                <DateTimePicker label="End Time" value={end} onChange={handleEnd} renderInput={(params) => <TextField {...params} />}/>
-                            </LocalizationProvider>
+                    {func ? 
+                        <Stack direction="column" alignItems="center" spacing={3}>
+                            <Button size="medium" variant="contained" onClick={() => fetchData("timeclock/")}>Get Current Time!</Button>
+                            <Typography>It is now {time}</Typography>
                         </Stack>
-                        <Typography>Days diff: {time[0]}</Typography>
-                    </Stack>
-                }
+                    : null}
+                    {func ? 
+                        null :
+                        <Stack direction="column" alignItems="center" spacing={3}>
+                            <Button size="medium" variant="contained" onClick={() => fetchData("timeclockdiff/")}>Get Time Difference!</Button> 
+                            <Stack direction="row" alignItems="center" spacing={2}>
+                                <LocalizationProvider dateAdapter={DateAdapter}>
+                                    <DateTimePicker label="Start Time" value={start} onChange={handleStart} renderInput={(params) => <TextField {...params} />}/>
+                                    <DateTimePicker label="End Time" value={end} onChange={handleEnd} renderInput={(params) => <TextField {...params} />}/>
+                                </LocalizationProvider>
+                            </Stack>
+                            <Typography>The dates are {time[0]} days, {time[1]} hours, {time[2]} minutes, and {time[3]} seconds apart</Typography>
+                        </Stack>
+                    }
+                </Stack>
             </Box>
         </Modal>
     </div>

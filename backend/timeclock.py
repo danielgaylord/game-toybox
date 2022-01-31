@@ -1,12 +1,14 @@
-import datetime
+from datetime import datetime
 
-def time_between(start_time=datetime.datetime.now(), end_time=datetime.datetime.now()):
+def time_between(start_time, end_time):
+    start_time = datetime.strptime(start_time.replace("%20", " "), "%a, %d %b %Y %H:%M:%S %Z")
+    end_time = datetime.strptime(end_time.replace("%20", " "), "%a, %d %b %Y %H:%M:%S %Z")
     difference = end_time - start_time
     days = difference.days
     hrs = difference.seconds // 3600
     mins = (difference.seconds % 3600) // 60
     secs = (difference.seconds % 60)
-    return (days, hrs, mins, secs)
+    return [days, hrs, mins, secs]
 
 def get_time():
-    return datetime.datetime.now()
+    return datetime.now()
