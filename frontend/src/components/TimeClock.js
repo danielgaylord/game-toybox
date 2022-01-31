@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Button, IconButton, Modal, Box, Stack, Typography, Switch } from '@mui/material';
-import DateTimePicker from '@mui/lab/DateTimePicker';
+import { Button, IconButton, Modal, Box, Stack, Typography, Switch, TextField } from '@mui/material';
+import { DateTimePicker, LocalizationProvider } from '@mui/lab';
+import DateAdapter from '@mui/lab/AdapterDateFns';
 import TimeClockIcon from '../assets/images/clock-icon.png';
 import { styled } from '@mui/material/styles';
 
@@ -26,8 +27,10 @@ const CustomIconButton = styled(IconButton)`
 const TimeClock = () => {
     const [time, setTime] = useState("");
 
-    const [start, setStart] = useState();  
-    const [end, setEnd] = useState()
+    const [start, setStart] = useState(new Date());  
+    const [end, setEnd] = useState(new Date())
+    const handleStart = (newStart) => setStart(newStart);
+    const handleEnd = (newEnd) => setEnd(newEnd);
 
     const api_base_url = window.location.href + "board/timeclock/"
 
@@ -58,21 +61,28 @@ return (
         </CustomIconButton>
         <Modal open={open} onClose={handleClose}>
             <Box sx={BoxStyle}>
-                <Stack direction="row" spacing={2} alignItems="center" onChange={functionSwitch}>
+                <Stack direction="column" alignItems="center" spacing={2} onChange={functionSwitch}>
                     <Typography>Now</Typography>
                     <Switch />
                     <Typography>Difference</Typography>
                 </Stack>
                 {func ? 
-                    <Stack direction="column" alignItems="center">
+                    <Stack direction="column" alignItems="center" spacing={3}>
                         <Button size="medium" variant="contained" onClick={() => fetchData()}>Get Current Time!</Button>
                         <Typography>It is now {time}</Typography>
                     </Stack>
                 : null}
                 {func ? 
-                    null : 
-                    <Stack direction="column" alignItems="center">
-                        <DateTimePicker />
+                    null :
+                    <Stack direction="column" alignItems="center" spacing={3}>
+                        <Button size="medium" variant="contained" onClick={() => fetchData()}>Get Time Difference!</Button> 
+                        <Stack direction="row" alignItems="center" spacing={2}>
+                            <LocalizationProvider dateAdapter={DateAdapter}>
+                                <DateTimePicker label="Start Time" value={start} onChange={handleStart} renderInput={(params) => <TextField {...params} />}/>
+                                <DateTimePicker label="End Time" value={end} onChange={handleEnd} renderInput={(params) => <TextField {...params} />}/>
+                            </LocalizationProvider>
+                        </Stack>
+                        <Typography>Days diff: {time[0]}</Typography>
                     </Stack>
                 }
             </Box>
