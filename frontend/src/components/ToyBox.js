@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Matter from 'matter-js';
 import PieChart from './PieChart';
 import TimeClock from './TimeClock';
+import Sudoku from './Sudoku';
 
 const ToyBox = () => {
     // References to interact with scene and engine outside of Matter
@@ -39,13 +40,16 @@ const ToyBox = () => {
         var bodies = []
         for (var x = 0; x < dom_bodies.length; x++) {
             var toy_body
+            var x_pos = Math.random() * screenW;
+            var y_pos = Math.random() * screenH;
             if (dom_bodies[x].classList.contains('round')) {
-                var x_pos = Math.random() * screenW;
-                var y_pos = Math.random() * screenH;
                 toy_body = Matter.Bodies.circle(x_pos, y_pos, 100);
-                dom_bodies[x].style.top = y_pos + "px";
-                dom_bodies[x].style.left = x_pos + "px";
             }
+            if (dom_bodies[x].classList.contains('square')) {
+                toy_body = Matter.Bodies.rectangle(x_pos, y_pos, 200, 200);
+            }
+            dom_bodies[x].style.top = y_pos + "px";
+            dom_bodies[x].style.left = x_pos + "px";
             dom_bodies[x].id = toy_body.id
             bodies.push(toy_body)
         }
@@ -138,6 +142,7 @@ const ToyBox = () => {
             <div ref={scene} style={{ width: '100%', height: '100%', overflow: 'hidden'}}>
                 <PieChart />
                 <TimeClock />
+                <Sudoku />
             </div>
         </>
     )
