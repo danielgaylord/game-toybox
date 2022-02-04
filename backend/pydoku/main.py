@@ -1,6 +1,6 @@
 from sudoku import Sudoku
 
-def main():
+def main() -> None:
     # Uncomment to allow user input
     # value_string = input("Please enter the values in one long string of text: ")
 

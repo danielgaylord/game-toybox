@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import mpld3
 import os 
 
-def GeneratePie(data, colors, wedge):
+def GeneratePie(data: str, colors: str, wedge: str) -> str:
     # turn inputs into usable lists
     data = [float(i) for i in data.split(',')]
     colors = ['#' + i for i in colors.split(',')]

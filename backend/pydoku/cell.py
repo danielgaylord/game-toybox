@@ -2,12 +2,12 @@
 class Cell():
 
     # init/constructor
-    def __init__(self, value):
+    def __init__(self, value: int) -> None:
         self.value = value
         self.options = []
 
     # determine the potential values based on the size of the region
-    def set_options(self, region_size):
+    def set_options(self, region_size: int) -> None:
         if self.value == 0:
             self.options = [x for x in range(1, region_size + 1) if self.value == 0]
 

@@ -6,24 +6,24 @@ from cell import Cell
 class Region():
 
     #init/constructor
-    def __init__(self):
+    def __init__(self) -> None:
         self.region_size = 0
         self.cells = []
 
     # determine the size of the region by the number of cells
-    def set_size(self):
+    def set_size(self) -> None:
         self.region_size = len(self.cells)
 
     # go through each cell in the region and set their potential values based on the size of the region
     # as cells can be in multiple regions, cells will have potential values based on the largest region they are in
-    def set_options(self):
+    def set_options(self) -> None:
         for c in self.cells:
             if c.value == 0 or len(c.options) > self.region_size:
                 c.options.clear()
                 c.set_options(self.region_size)
 
     # loop through combinations of cells in the region to reduce the options of each cell based on cells with known values
-    def remove_options(self):
+    def remove_options(self) -> None:
         for c1, c2 in combinations(self.cells, 2):
             if c1.value != c2.value:
                 if c1.value == 0 and c1.options.count(c2.value) > 0:
@@ -32,14 +32,14 @@ class Region():
                     c2.options.remove(c1.value)
 
     # loop through cells in the region to find cells with only one option and set the cell's value to that option
-    def naked_single(self):
+    def naked_single(self) -> None:
         for c in self.cells:
             if len(c.options) == 1:
                 c.value = c.options.pop()
         self.remove_options()
 
     # loop through combinations of cells in the region to see if 2 cells have the same 2 options, if so remove from all other cells
-    def naked_pair(self):
+    def naked_pair(self) -> None:
         pair = []
         for c1, c2 in combinations(self.cells, 2):
             if len(c1.options) == 2 and len(c2.options) == 2 and c1.options == c2.options:
@@ -53,7 +53,7 @@ class Region():
             self.remove_options()
 
     # determine if a option only occurs in one cell in the region and set that cell's value to that option
-    def hidden_single(self):
+    def hidden_single(self) -> None:
         total_options = [y for x in self.cells for y in x.options]
         for i in range(1, self.region_size + 1):
             if total_options.count(i) == 1:
@@ -64,13 +64,13 @@ class Region():
         self.remove_options()
 
     # solve the region as best as possible with the known information
-    def solve(self):
+    def solve(self) -> None:
         self.naked_single()
         self.naked_pair()
         self.hidden_single()
 
     # return how many cells in the region still have an unknown value
-    def unknowns(self):
+    def unknowns(self) -> int:
         count = 0
         for c in self.cells:
             if c.value == 0:

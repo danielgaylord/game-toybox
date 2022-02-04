@@ -5,7 +5,7 @@ from cell import Cell
 class Sudoku():
     
     #init/constructor
-    def __init__(self, values, regions_array):
+    def __init__(self, values: list, regions_array: list) -> None:
         self.regions = []
         for i in range(0, len(set([y for x in regions_array for y in x]))):
             self.regions.append(Region())
@@ -29,7 +29,7 @@ class Sudoku():
     # first, make sure each cell only lists possible options
     # next, continue to try solving each region until no changes have been made
     # continue doing this until either we are 'stuck' there are no unknowns
-    def solve(self):
+    def solve(self) -> None:
         for r in self.regions:
             r.remove_options()
         region_unknowns = self.unknowns()
@@ -51,7 +51,7 @@ class Sudoku():
 
     # print the sudoku puzzle to the terminal
     # HUGE ASSUMPTION: the puzzle is rectangular (no twin sudokus) and that the regions are listed as rows, columns, 'houses', etc
-    def print(self):
+    def print(self) -> None:
         print("-------------")
         for row in range(0, self.regions[0].region_size):
             print("|", end = '')
